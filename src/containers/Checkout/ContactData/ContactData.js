@@ -52,6 +52,8 @@ class ContactData extends Component {
     }
 
     render () {
+
+        console.log("checkout contact data")
         let form =(
             <form>
                     <input className= {classes.Input} type= "text" name= "name" placeholder="Your Name" />

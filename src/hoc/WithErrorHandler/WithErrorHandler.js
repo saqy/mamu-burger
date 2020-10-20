@@ -13,9 +13,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 return req;
             });
             this.resInterceptor = axios.interceptors.response.use(res => {
-                console.log('hdcvjabcknxk               ', res);
                 return res;
-
             }, error => {
                 this.setState({ error: error });
             });
