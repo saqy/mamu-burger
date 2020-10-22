@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary"
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner'
@@ -107,7 +108,7 @@ class ContactData extends Component {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
         }
@@ -180,7 +181,7 @@ class ContactData extends Component {
         }
 
         console.log("checkout contact data")
-        let form =(
+        let form = (
                 <form onSubmit={this.orderHandler} >
                     {/* <Input elementType="....." elemetConfig= "..." value= "..." /> */}
                     {formElementsArray.map(formElement => (
@@ -218,4 +219,11 @@ class ContactData extends Component {
  
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+}
+
+export default connect(mapStateToProps)(ContactData);
