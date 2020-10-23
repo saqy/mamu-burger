@@ -17,9 +17,16 @@ export const purchaseBurgerFail = ( error ) => {
 };
 
 //asynchronous action creators
-export const purchaseBurgerStart = ( orderData ) => {
+export const purchaseBurgerStart = () => {
+    return {
+        type: actionTypes.PURCHASE_BURGER_START
+    };
+};
+
+export const purchaseBurger = ( orderData ) => {
     //we get here dispatch function using redux thunk middleware
     return dispatch => {
+        dispatch(purchaseBurgerStart());
         axios.post('/orders.json',  orderData)
         .then(response => {
             console.log('response data ', response.data);
