@@ -8,7 +8,7 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/WithErrorHandler/WithErrorHandler';
 import axios from '../../axios-order'
-import * as actionTypes from '../../store/actions/actionTypes'
+import * as burgerBuilderActions from '../../store/actions/index'
 
 
 class BurgerBuilder extends Component {
@@ -85,11 +85,11 @@ class BurgerBuilder extends Component {
                 </Aux>
             );
             orderSummary = <OrderSummary 
-                            ingredients= {this.props.ings} 
-                            price= {this.props.price}
-                            purchaseCancelled= {this.purchaseCancelHandler}
-                            purchaseContinued= {this.purchaseContinueHandler}
-                            />
+                                ingredients= {this.props.ings} 
+                                price= {this.props.price}
+                                purchaseCancelled= {this.purchaseCancelHandler}
+                                purchaseContinued= {this.purchaseContinueHandler}
+                                />
         }
         
         if(this.state.loading){
@@ -120,14 +120,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingName) => dispatch({
-            type: actionTypes.ADD_INGREDIENT,
-            ingredientName: ingName
-        }),
-        onIngredientRemoved: (ingName) => dispatch({
-            type: actionTypes.REMOVE_INGREDIENT,
-            ingredientName: ingName
-        })
+        onIngredientAdded: (ingName) => dispatch(burgerBuilderActions.addIngredients(ingName)),
+        onIngredientRemoved: (ingName) => dispatch(burgerBuilderActions.removeIngredients(ingName))
     }
 }
 
