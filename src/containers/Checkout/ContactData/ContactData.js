@@ -111,22 +111,7 @@ class ContactData extends Component {
             ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
-        }
-        // alert('You Continue');
-        axios.post('/orders.json',  order)
-        .then(response => {
-            this.setState({ 
-                loading: false 
-                // purchasing: false 
-            })
-            this.props.history.push('/');
-        })
-        .catch(error => {
-            this.setState({ 
-                loading: false
-                // purchasing: false 
-            })
-        })
+        };
     }
 
     checkValidity (value, rules) {
