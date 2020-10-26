@@ -5,13 +5,9 @@ import ContactData from './ContactData/ContactData'
 import { connect } from 'react-redux';
 
 class Checkout extends Component {
-    //will
-    // componentDidMount () {
-    //     this.props.onInitPurchase();
-    // }
+
     checkoutCancelledHandler = () => {
         this.props.history.goBack();
-
     }
 
     checkoutContinuedHandler = () => {
@@ -38,7 +34,7 @@ class Checkout extends Component {
         return (
             <div>
                 {summary}
-                            </div>
+            </div>
         )
     }
 

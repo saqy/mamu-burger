@@ -11,8 +11,7 @@ import * as actions from '../../store/actions/index'
 import axios from '../../axios-order';
 
 class BurgerBuilder extends Component {
-
-    state= {
+    state = {
         purchasing: false
     }
 
@@ -22,9 +21,6 @@ class BurgerBuilder extends Component {
     }
 
     updatePurchaseState = (ingredients) => {
-        // const ingredients = {
-        //     ...this.state.ingredients
-        // };
         const sum = Object.keys(ingredients).map(igKey => {
             return ingredients[igKey];
         }).reduce((sum, el) => {

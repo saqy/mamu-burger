@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-order'
-//synchronous action creators
+
 export const purchaseBurgerSuccess = (id, orderData) => {
     return {
         type: actionTypes.PURCHASE_BURGER_SUCCESS,
@@ -16,7 +16,6 @@ export const purchaseBurgerFail = ( error ) => {
     };
 };
 
-//asynchronous action creators
 export const purchaseBurgerStart = () => {
     return {
         type: actionTypes.PURCHASE_BURGER_START
@@ -24,7 +23,6 @@ export const purchaseBurgerStart = () => {
 };
 
 export const purchaseBurger = ( orderData ) => {
-    //we get here dispatch function using redux thunk middleware
     return dispatch => {
         dispatch(purchaseBurgerStart());
         axios.post('/orders.json',  orderData)

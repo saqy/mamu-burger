@@ -19,7 +19,6 @@ const checkoutSummary = (props) => {
 
         </div>
     )
-
 }
 
 export default checkoutSummary;
