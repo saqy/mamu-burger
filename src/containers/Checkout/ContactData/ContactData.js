@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary"
 import Button from "../../../components/UI/Button/Button";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import classes from "./ContactData.module.css";
@@ -151,13 +150,11 @@ class ContactData extends Component {
     );
     updatedFormElement.touched = true;
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-    // console.log(updatedFormElement);
     let formIsValid = true;
     for (let inputIdentifier in updatedOrderForm) {
       formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
     }
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
-    // console.log(event.target.value)
   };
 
   render() {
@@ -171,7 +168,6 @@ class ContactData extends Component {
 
     let form = (
       <form onSubmit={this.orderHandler}>
-        {/* <Input elementType="....." elemetConfig= "..." value= "..." /> */}
         {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
@@ -184,13 +180,9 @@ class ContactData extends Component {
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        {/* <Input inputtype="input" type= "email" name= "email" placeholder="Your Email" />
-                    <Input inputtype="input" type= "text" name= "street" placeholder="Street" />
-                    <Input inputtype="input" type= "text" name= "postal" placeholder="Postal Code" /> */}
         <Button
           btnType="Success"
           disabled={!this.state.formIsValid}
-          // clicked={this.orderHandler}
         >
           {" "}
           ORDER{" "}
