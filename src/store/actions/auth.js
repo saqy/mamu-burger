@@ -22,6 +22,20 @@ export const authFail = (error) => {
   };
 };
 
+export const logout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  }
+}
+
+export const checkAuthTimeout = (expirationTime) => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime  );
+  };
+}
+
 //for async code
 export const auth = (email, password, isSignup) => {
   return (dispatch) => {
@@ -31,9 +45,9 @@ export const auth = (email, password, isSignup) => {
       password: password,
       returnSecureToken: true
     };
-    let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[FIREBASE_API_KEY]"
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`
     if(!isSignup) {
-      url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[FIREBASE_API_KEY]"
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`
     }
     axios
       .post(
@@ -43,10 +57,11 @@ export const auth = (email, password, isSignup) => {
       .then((response) => {
         console.log("response" + response);
         dispatch(authSuccess(response.data.idToken, response.data.localId));
+        dispatch(checkAuthTimeout(response.data.expiresIn));
       })
       .catch((err) => {
         console.log("err" + err);
-        dispatch(authFail(err));
+        dispatch(authFail(err.response.data.error));
       });
   };
 };
