@@ -32,7 +32,7 @@ export const auth = (email, password) => {
     };
     axios
       .post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCirbqpFlMWxsH7FERIl9xiEpv5O7XbJ88",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]",
         authData
       )
       .then((response) => {
