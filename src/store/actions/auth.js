@@ -11,7 +11,7 @@ export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
-    userId: userId
+    userId: userId,
   };
 };
 
@@ -24,17 +24,17 @@ export const authFail = (error) => {
 
 export const logout = () => {
   return {
-    type: actionTypes.AUTH_LOGOUT
-  }
-}
+    type: actionTypes.AUTH_LOGOUT,
+  };
+};
 
 export const checkAuthTimeout = (expirationTime) => {
-  return dispatch => {
+  return (dispatch) => {
     setTimeout(() => {
       dispatch(logout());
-    }, expirationTime  );
+    }, expirationTime * 1000);
   };
-}
+};
 
 //for async code
 export const auth = (email, password, isSignup) => {
@@ -43,17 +43,14 @@ export const auth = (email, password, isSignup) => {
     const authData = {
       email: email,
       password: password,
-      returnSecureToken: true
+      returnSecureToken: true,
     };
-    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`
-    if(!isSignup) {
-      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+    if (!isSignup) {
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
     }
     axios
-      .post(
-        url,
-        authData
-      )
+      .post(url, authData)
       .then((response) => {
         console.log("response" + response);
         dispatch(authSuccess(response.data.idToken, response.data.localId));
@@ -63,5 +60,12 @@ export const auth = (email, password, isSignup) => {
         console.log("err" + err);
         dispatch(authFail(err.response.data.error));
       });
+  };
+};
+
+export const setAuthRedirectPath = (path) => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path,
   };
 };
