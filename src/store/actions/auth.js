@@ -1,6 +1,7 @@
 import * as actionTypes from "./actionTypes";
 
 export const authStart = () => {
+  //to add spinner and loading state
   return {
     type: actionTypes.AUTH_START,
   };
@@ -29,15 +30,15 @@ export const logout = () => {
 
 export const logoutSucceed = () => {
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_LOGOUT,
   };
 };
 
 export const checkAuthTimeout = (expirationTime) => {
   return {
     type: actionTypes.AUTH_CHECK_TIMEOUT,
-    expirationTime: expirationTime
-  }
+    expirationTime: expirationTime,
+  };
 };
 
 //for async code
@@ -46,8 +47,8 @@ export const auth = (email, password, isSignup) => {
     type: actionTypes.AUTH_USER,
     email: email,
     password: password,
-    isSignup: isSignup
-  }
+    isSignup: isSignup,
+  };
 };
 
 export const setAuthRedirectPath = (path) => {
@@ -60,5 +61,5 @@ export const setAuthRedirectPath = (path) => {
 export const authCheckState = () => {
   return {
     type: actionTypes.AUTH_CHECK_INITIAL_STATE,
-  }
+  };
 };
